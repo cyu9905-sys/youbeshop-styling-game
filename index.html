@@ -1,184 +1,581 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Youbeshop Styling Game v2.3 - Sparkle Edition</title>
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <style>
-        :root {
-            --main-bg: #f0f2f5;
-            --accent: #ff4757;
-            --sparkle-color: #fff200; /* 반짝이는 노란색 */
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Youbeshop Styling v2.5</title>
 
-        body {
-            font-family: 'Pretendard', sans-serif;
-            background-color: var(--main-bg);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 30px;
-            margin: 0;
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        #game-container {
-            display: flex;
-            background: white;
-            padding: 20px;
-            border-radius: 24px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-            gap: 20px;
-        }
+    body {
+      margin: 0;
+      font-family: Arial, "Noto Sans KR", sans-serif;
+      background: linear-gradient(135deg, #f2f4f8, #ffffff);
+      color: #111;
+      min-height: 100vh;
+    }
 
-        /* 캔버스 영역 */
-        #canvas-wrapper {
-            position: relative;
-            width: 450px;
-            height: 600px;
-            background: #ffffff;
-            border: 2px solid #eee;
-            border-radius: 15px;
-            overflow: hidden;
-        }
+    .app {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 16px 60px;
+    }
 
-        #item-layer {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0; left: 0;
-        }
+    h1 {
+      text-align: center;
+      font-size: 36px;
+      margin: 18px 0 8px;
+      font-weight: 900;
+    }
 
-        /* ✨ 반짝임 & 색상 변화 애니메이션 정의 */
-        @keyframes sparkle-drop {
-            0% {
-                transform: scale(0.5);
-                filter: brightness(3) sepia(1) hue-rotate(50deg); /* 밝게 빛나고 색상 변함 */
-                box-shadow: 0 0 50px var(--sparkle-color);
-                opacity: 0;
-            }
-            50% {
-                transform: scale(1.1);
-                filter: brightness(1.5) sepia(0.5);
-                box-shadow: 0 0 30px var(--accent);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(1);
-                filter: brightness(1) sepia(0);
-                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            }
-        }
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 24px;
+      font-size: 15px;
+    }
 
-        /* 추가될 아이템에 애니메이션 적용 */
-        .placed-item {
-            position: absolute;
-            cursor: move;
-            transform-origin: center;
-            animation: sparkle-drop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            user-drag: none;
-        }
+    .main {
+      display: grid;
+      grid-template-columns: 1.15fr 0.95fr;
+      gap: 24px;
+      align-items: start;
+    }
 
-        /* 나머지 스타일링 (이전 버전과 동일) */
-        #controller { width: 320px; display: flex; flex-direction: column; }
-        .item-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; max-height: 400px; overflow-y: auto; }
-        .inventory-item { width: 100%; border-radius: 10px; cursor: pointer; border: 1px solid #eee; transition: 0.2s; }
-        .btn { padding: 15px; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; margin-top: 10px; }
-        .btn-save { background: var(--accent); color: white; }
-    </style>
+    .stage,
+    .closet {
+      background: #fff;
+      border-radius: 28px;
+      padding: 24px;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.10);
+    }
+
+    .stage-title,
+    .closet-title {
+      font-size: 24px;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    .model-area {
+      height: 470px;
+      border: 2px dashed #d8d8d8;
+      border-radius: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(180deg, #fff, #f7f7f7);
+      overflow: hidden;
+    }
+
+    .model {
+      width: 210px;
+      height: 390px;
+      position: relative;
+      transition: 0.3s;
+    }
+
+    .head {
+      width: 86px;
+      height: 86px;
+      background: #ffdcb7;
+      border-radius: 50%;
+      position: absolute;
+      top: 8px;
+      left: 62px;
+      border: 5px solid #fff;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+      z-index: 5;
+    }
+
+    .hair {
+      width: 102px;
+      height: 60px;
+      background: #3b2418;
+      border-radius: 50px 50px 18px 18px;
+      position: absolute;
+      top: 0;
+      left: 54px;
+      z-index: 4;
+    }
+
+    .neck {
+      width: 34px;
+      height: 38px;
+      background: #ffd2a3;
+      position: absolute;
+      top: 90px;
+      left: 88px;
+      z-index: 2;
+    }
+
+    .arm-left,
+    .arm-right {
+      width: 34px;
+      height: 145px;
+      background: #ffd2a3;
+      border-radius: 30px;
+      position: absolute;
+      top: 135px;
+      z-index: 1;
+    }
+
+    .arm-left {
+      left: 18px;
+      transform: rotate(12deg);
+    }
+
+    .arm-right {
+      right: 18px;
+      transform: rotate(-12deg);
+    }
+
+    .body {
+      width: 142px;
+      height: 220px;
+      position: absolute;
+      top: 116px;
+      left: 34px;
+      border-radius: 48px 48px 22px 22px;
+      background: linear-gradient(180deg, #f8f8f8, #dadada);
+      box-shadow: 0 16px 38px rgba(0,0,0,0.18);
+      transition: 0.35s;
+      z-index: 3;
+      border: 4px solid rgba(255,255,255,0.95);
+    }
+
+    .skirt {
+      width: 170px;
+      height: 88px;
+      position: absolute;
+      top: 286px;
+      left: 20px;
+      border-radius: 22px 22px 58px 58px;
+      background: linear-gradient(180deg, #f8f8f8, #d8d8d8);
+      transition: 0.35s;
+      z-index: 2;
+    }
+
+    .legs {
+      width: 104px;
+      height: 82px;
+      position: absolute;
+      top: 326px;
+      left: 53px;
+      z-index: 0;
+    }
+
+    .legs::before,
+    .legs::after {
+      content: "";
+      width: 34px;
+      height: 82px;
+      background: #ffd2a3;
+      border-radius: 20px;
+      position: absolute;
+      top: 0;
+    }
+
+    .legs::before {
+      left: 10px;
+    }
+
+    .legs::after {
+      right: 10px;
+    }
+
+    .style-result {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 20px;
+      background: #111;
+      color: #fff;
+      line-height: 1.6;
+      font-size: 16px;
+      min-height: 96px;
+    }
+
+    .style-result strong {
+      color: #ffd45a;
+      font-size: 20px;
+    }
+
+    .items {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      max-height: 560px;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+
+    .item {
+      border: 2px solid #eeeeee;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #fafafa;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .item:hover {
+      transform: translateY(-4px);
+      border-color: #f5c542;
+      box-shadow: 0 12px 22px rgba(0,0,0,0.12);
+    }
+
+    .item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      display: block;
+      background: #eee;
+    }
+
+    .item-name {
+      padding: 10px;
+      font-weight: 900;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    button {
+      border: none;
+      border-radius: 18px;
+      padding: 15px 12px;
+      font-weight: 900;
+      font-size: 15px;
+      cursor: pointer;
+      background: linear-gradient(180deg, #ffe58a, #d9a51f);
+      color: #231800;
+      box-shadow: 0 7px 0 #9b7411;
+      transition: 0.15s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    button:active {
+      transform: translateY(5px);
+      box-shadow: 0 2px 0 #9b7411;
+    }
+
+    .sound-row {
+      text-align: center;
+      margin-top: 18px;
+    }
+
+    .sound-btn {
+      background: linear-gradient(180deg, #111, #333);
+      color: #fff;
+      box-shadow: 0 7px 0 #000;
+      min-width: 180px;
+    }
+
+    .shop-link {
+      text-align: center;
+      margin-top: 22px;
+    }
+
+    .shop-link a {
+      display: inline-block;
+      padding: 14px 22px;
+      border-radius: 999px;
+      background: #111;
+      color: #ffd45a;
+      text-decoration: none;
+      font-weight: 900;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 28px;
+      color: #777;
+      font-weight: 700;
+    }
+
+    @media (max-width: 850px) {
+      h1 {
+        font-size: 27px;
+      }
+
+      .main {
+        grid-template-columns: 1fr;
+      }
+
+      .model-area {
+        height: 430px;
+      }
+
+      .buttons {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .items {
+        grid-template-columns: repeat(2, 1fr);
+        max-height: none;
+      }
+
+      .item img {
+        height: 135px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .app {
+        padding: 16px 10px 35px;
+      }
+
+      h1 {
+        font-size: 23px;
+      }
+
+      .stage,
+      .closet {
+        padding: 16px;
+        border-radius: 22px;
+      }
+
+      .buttons {
+        grid-template-columns: 1fr;
+      }
+
+      .items {
+        gap: 10px;
+      }
+
+      .item img {
+        height: 120px;
+      }
+
+      .style-result {
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-
-    <div class="title" style="font-size: 28px; font-weight: 900; margin-bottom: 20px;">Youbeshop Styling v2.3 ✨</div>
-
-    <div id="game-container">
-        <div id="canvas-wrapper">
-            <div id="item-layer"></div>
-        </div>
-
-        <div id="controller">
-            <div style="font-weight: 700; margin-bottom: 10px;">👕 CLOSET</div>
-            <div class="item-grid">
-                <img src="https://image.styleceo.co.kr/product/BC068/BC068_01.jpg" class="inventory-item" onclick="spawn(this.src)">
-                <img src="https://image.styleceo.co.kr/product/BC369/BC369_01.jpg" class="inventory-item" onclick="spawn(this.src)">
-                <img src="https://image.styleceo.co.kr/product/NU314/NU314_01.jpg" class="inventory-item" onclick="spawn(this.src)">
-                <img src="https://image.styleceo.co.kr/product/AB155/AB155_01.jpg" class="inventory-item" onclick="spawn(this.src)">
-            </div>
-            
-            <div style="font-size: 12px; color: #888; margin-top: 15px; background: #f8f9fa; padding: 10px; border-radius: 8px;">
-                💡 아이템을 누르면 <b>반짝</b>하며 나타납니다!<br>
-                💡 <b>Shift + 휠</b>로 회전도 가능해요.
-            </div>
-
-            <button class="btn btn-save" onclick="saveAsImage()">SAVE LOOK</button>
-        </div>
+  <div class="app">
+    <h1>Youbeshop Styling v2.5 ✨</h1>
+    <div class="subtitle">
+      이미지 깨짐을 줄이고, 옷을 누르면 모델에게 착장되는 유비샵 스타일링 게임입니다.
     </div>
 
-    <script>
-        const itemLayer = document.getElementById('item-layer');
-        let zIndexCounter = 100;
+    <div class="main">
+      <section class="stage">
+        <div class="stage-title">👗 MODEL STAGE</div>
 
-        function spawn(src) {
-            const img = document.createElement('img');
-            img.src = src;
-            img.className = 'placed-item';
-            img.style.width = '200px';
-            img.style.left = '125px';
-            img.style.top = '150px';
-            img.dataset.rotation = 0;
-            img.style.zIndex = ++zIndexCounter;
+        <div class="model-area">
+          <div class="model">
+            <div class="hair"></div>
+            <div class="head"></div>
+            <div class="neck"></div>
+            <div class="arm-left"></div>
+            <div class="arm-right"></div>
+            <div class="body" id="body"></div>
+            <div class="skirt" id="skirt"></div>
+            <div class="legs"></div>
+          </div>
+        </div>
 
-            img.onmousedown = startDrag;
-            img.ondblclick = () => img.remove();
-            
-            // 휠 이벤트 (회전/사이즈)
-            img.onwheel = (e) => {
-                e.preventDefault();
-                if (e.shiftKey) {
-                    let rotation = parseInt(img.dataset.rotation);
-                    rotation += (e.deltaY < 0) ? 10 : -10;
-                    img.dataset.rotation = rotation;
-                    img.style.transform = `rotate(${rotation}deg)`;
-                } else {
-                    let width = parseInt(img.style.width);
-                    width += (e.deltaY < 0) ? 10 : -10;
-                    img.style.width = Math.max(30, width) + 'px';
-                }
-            };
+        <div class="style-result" id="result">
+          <strong>아리엘 추천</strong><br>
+          오른쪽 옷 사진이나 아래 스타일 버튼을 눌러보세요. 모델 착장 결과가 여기에 표시됩니다.
+        </div>
 
-            itemLayer.appendChild(img);
-        }
+        <div class="buttons">
+          <button onclick="setStyle('daily')">데일리룩</button>
+          <button onclick="setStyle('wedding')">웨딩룩</button>
+          <button onclick="setStyle('luxury')">럭셔리룩</button>
+          <button onclick="setStyle('travel')">여행룩</button>
+          <button onclick="setStyle('sport')">스포츠룩</button>
+          <button onclick="setStyle('party')">파티룩</button>
+        </div>
 
-        function startDrag(e) {
-            const el = e.target;
-            el.style.zIndex = ++zIndexCounter;
-            const rect = el.getBoundingClientRect();
-            const canvasRect = itemLayer.getBoundingClientRect();
-            let shiftX = e.clientX - rect.left;
-            let shiftY = e.clientY - rect.top;
+        <div class="sound-row">
+          <button class="sound-btn" onclick="toggleSound()" id="soundBtn">🔊 소리 켜기</button>
+        </div>
 
-            function moveAt(pageX, pageY) {
-                el.style.left = (pageX - canvasRect.left - shiftX) + 'px';
-                el.style.top = (pageY - canvasRect.top - shiftY) + 'px';
-            }
+        <div class="shop-link">
+          <a href="https://youbeshop.com" target="_blank">YOUBESHOP 바로가기</a>
+        </div>
+      </section>
 
-            function onMouseMove(e) { moveAt(e.clientX, e.clientY); }
-            document.addEventListener('mousemove', onMouseMove);
-            document.onmouseup = () => {
-                document.removeEventListener('mousemove', onMouseMove);
-                document.onmouseup = null;
-            };
-            e.preventDefault();
-        }
+      <section class="closet">
+        <div class="closet-title">🧺 CLOSET</div>
 
-        function saveAsImage() {
-            html2canvas(document.getElementById('canvas-wrapper'), { useCORS: true }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = 'yoube-style.png';
-                link.href = canvas.toDataURL();
-                link.click();
-            });
-        }
-    </script>
+        <div class="items">
+          <div class="item" onclick="setStyle('daily')">
+            <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=80" alt="데일리룩">
+            <div class="item-name">데일리 니트룩</div>
+          </div>
+
+          <div class="item" onclick="setStyle('wedding')">
+            <img src="https://images.unsplash.com/photo-1525258946800-98cfd641d0de?auto=format&fit=crop&w=700&q=80" alt="웨딩룩">
+            <div class="item-name">화이트 드레스</div>
+          </div>
+
+          <div class="item" onclick="setStyle('luxury')">
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80" alt="럭셔리룩">
+            <div class="item-name">블랙 골드룩</div>
+          </div>
+
+          <div class="item" onclick="setStyle('travel')">
+            <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=700&q=80" alt="여행룩">
+            <div class="item-name">여행 캐주얼</div>
+          </div>
+
+          <div class="item" onclick="setStyle('sport')">
+            <img src="https://images.unsplash.com/photo-1483721310020-03333e577078?auto=format&fit=crop&w=700&q=80" alt="스포츠룩">
+            <div class="item-name">스포츠 코디</div>
+          </div>
+
+          <div class="item" onclick="setStyle('party')">
+            <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=700&q=80" alt="파티룩">
+            <div class="item-name">파티 원피스</div>
+          </div>
+
+          <div class="item" onclick="setStyle('spring')">
+            <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=700&q=80" alt="봄 감성룩">
+            <div class="item-name">봄 감성룩</div>
+          </div>
+
+          <div class="item" onclick="setStyle('office')">
+            <img src="https://images.unsplash.com/photo-1495385794356-15371f348c31?auto=format&fit=crop&w=700&q=80" alt="오피스룩">
+            <div class="item-name">오피스룩</div>
+          </div>
+
+          <div class="item" onclick="setStyle('casual')">
+            <img src="https://images.unsplash.com/photo-1516762689617-e1cffcef479d?auto=format&fit=crop&w=700&q=80" alt="캐주얼룩">
+            <div class="item-name">캐주얼 셔츠룩</div>
+          </div>
+
+          <div class="item" onclick="setStyle('bag')">
+            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80" alt="가방 신발 추천">
+            <div class="item-name">가방·신발 추천</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="footer">원팀 포에버 · 유비샵 가즈아 ☕🚀</div>
+  </div>
+
+  <script>
+    let soundOn = false;
+    let audioCtx = null;
+
+    const body = document.getElementById("body");
+    const skirt = document.getElementById("skirt");
+    const result = document.getElementById("result");
+    const soundBtn = document.getElementById("soundBtn");
+
+    function toggleSound() {
+      soundOn = !soundOn;
+      soundBtn.innerText = soundOn ? "🔇 소리 끄기" : "🔊 소리 켜기";
+      playSound();
+    }
+
+    function playSound() {
+      if (!soundOn) return;
+
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(520, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(900, audioCtx.currentTime + 0.12);
+
+      gain.gain.setValueAtTime(0.16, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.2);
+    }
+
+    function setStyle(type) {
+      playSound();
+
+      if (type === "daily") {
+        body.style.background = "linear-gradient(180deg, #ffffff, #bcd7ff)";
+        skirt.style.background = "linear-gradient(180deg, #8ab8ff, #3f6fb8)";
+        result.innerHTML = "<strong>데일리룩 추천</strong><br>깔끔한 니트와 데님 느낌의 코디입니다. 유비샵에서는 기본 니트, 셔츠, 데님 팬츠와 함께 추천하면 좋습니다.";
+      }
+
+      if (type === "wedding") {
+        body.style.background = "linear-gradient(180deg, #fffdf5, #f6e4b7)";
+        skirt.style.background = "linear-gradient(180deg, #fff8e6, #e6c77a)";
+        result.innerHTML = "<strong>웨딩룩 추천</strong><br>아리엘 감성의 우아한 드레스 스타일입니다. 웨딩드레스, 파티드레스, 진주 액세서리 추천에 어울립니다.";
+      }
+
+      if (type === "luxury") {
+        body.style.background = "linear-gradient(180deg, #111111, #d7b23a)";
+        skirt.style.background = "linear-gradient(180deg, #d7b23a, #151515)";
+        result.innerHTML = "<strong>럭셔리룩 추천</strong><br>블랙과 골드 포인트가 살아있는 프리미엄 스타일입니다. 고급 원피스, 재킷, 금장 액세서리 추천에 좋습니다.";
+      }
+
+      if (type === "travel") {
+        body.style.background = "linear-gradient(180deg, #9ee7ff, #34a26f)";
+        skirt.style.background = "linear-gradient(180deg, #58c98d, #1e6b4c)";
+        result.innerHTML = "<strong>여행룩 추천</strong><br>가볍고 편한 여행 코디입니다. 보스턴백, 크로스백, 편한 신발, 얇은 아우터와 연결하면 좋습니다.";
+      }
+
+      if (type === "sport") {
+        body.style.background = "linear-gradient(180deg, #ff7d7d, #3366ff)";
+        skirt.style.background = "linear-gradient(180deg, #3366ff, #111f66)";
+        result.innerHTML = "<strong>스포츠룩 추천</strong><br>활동성이 좋은 트레이닝 스타일입니다. 운동화, 조거팬츠, 후드티, 트레이닝 세트 추천에 어울립니다.";
+      }
+
+      if (type === "party") {
+        body.style.background = "linear-gradient(180deg, #ff4fd8, #6a00a8)";
+        skirt.style.background = "linear-gradient(180deg, #8b00d8, #24003d)";
+        result.innerHTML = "<strong>파티룩 추천</strong><br>화려한 컬러감의 파티 스타일입니다. 원피스, 미니백, 반짝이는 액세서리 추천에 좋습니다.";
+      }
+
+      if (type === "spring") {
+        body.style.background = "linear-gradient(180deg, #ffe0ea, #b8f0c4)";
+        skirt.style.background = "linear-gradient(180deg, #b8f0c4, #ffb6cf)";
+        result.innerHTML = "<strong>봄 감성룩 추천</strong><br>화사하고 부드러운 봄 스타일입니다. 플라워 원피스, 가디건, 밝은 컬러 가방 추천에 어울립니다.";
+      }
+
+      if (type === "office") {
+        body.style.background = "linear-gradient(180deg, #f8f8f8, #777777)";
+        skirt.style.background = "linear-gradient(180deg, #555555, #222222)";
+        result.innerHTML = "<strong>오피스룩 추천</strong><br>단정하고 세련된 출근 스타일입니다. 셔츠, 슬랙스, 재킷, 토트백 추천에 좋습니다.";
+      }
+
+      if (type === "casual") {
+        body.style.background = "linear-gradient(180deg, #e8f0ff, #304a6d)";
+        skirt.style.background = "linear-gradient(180deg, #355c7d, #1f2f46)";
+        result.innerHTML = "<strong>캐주얼 셔츠룩 추천</strong><br>편하게 입기 좋은 셔츠 스타일입니다. 유비샵에서는 셔츠, 팬츠, 미니백 조합으로 추천하면 좋습니다.";
+      }
+
+      if (type === "bag") {
+        body.style.background = "linear-gradient(180deg, #fff1c1, #e07a2f)";
+        skirt.style.background = "linear-gradient(180deg, #e07a2f, #8b3f1d)";
+        result.innerHTML = "<strong>가방·신발 추천</strong><br>코디 완성은 가방과 신발입니다. 유비샵 상품 추천 문구와 연결하기 좋은 스타일입니다.";
+      }
+    }
+  </script>
 </body>
 </html>
