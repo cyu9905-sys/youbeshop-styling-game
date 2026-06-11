@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Youbeshop Styling v2.5</title>
+  <title>Youbeshop Styling v3.0 Ariel Model</title>
 
   <style>
     * {
@@ -46,7 +46,8 @@
     }
 
     .stage,
-    .closet {
+    .closet,
+    .card {
       background: #fff;
       border-radius: 28px;
       padding: 24px;
@@ -61,7 +62,7 @@
     }
 
     .model-area {
-      height: 470px;
+      min-height: 520px;
       border: 2px dashed #d8d8d8;
       border-radius: 24px;
       display: flex;
@@ -69,122 +70,98 @@
       align-items: center;
       background: linear-gradient(180deg, #fff, #f7f7f7);
       overflow: hidden;
+      padding: 18px;
     }
 
-    .model {
-      width: 210px;
-      height: 390px;
+    .ariel-photo-card {
+      width: 100%;
+      max-width: 430px;
+      min-height: 480px;
+      margin: 0 auto;
+      border-radius: 26px;
+      background: linear-gradient(180deg, #ffffff, #fff8dd);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 18px;
+      box-shadow: 0 18px 38px rgba(0,0,0,0.12);
       position: relative;
-      transition: 0.3s;
     }
 
-    .head {
-      width: 86px;
-      height: 86px;
-      background: #ffdcb7;
-      border-radius: 50%;
+    .ariel-badge {
+      background: #ffffff;
+      border-radius: 999px;
+      padding: 10px 20px;
+      font-size: 22px;
+      font-weight: 900;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.10);
+      text-align: center;
+    }
+
+    .ariel-sub {
+      font-size: 15px;
+      font-weight: 800;
+      color: #555;
+      margin-top: -4px;
+    }
+
+    .ariel-photo-wrap {
+      position: relative;
+      width: 260px;
+      max-width: 82%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .ariel-photo {
+      width: 100%;
+      height: auto;
+      border-radius: 24px;
+      object-fit: contain;
+      filter: drop-shadow(0 18px 22px rgba(0,0,0,0.22));
+      display: block;
+    }
+
+    .ariel-outfit {
       position: absolute;
-      top: 8px;
-      left: 62px;
-      border: 5px solid #fff;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.15);
-      z-index: 5;
-    }
-
-    .hair {
-      width: 102px;
-      height: 60px;
-      background: #3b2418;
-      border-radius: 50px 50px 18px 18px;
-      position: absolute;
-      top: 0;
-      left: 54px;
-      z-index: 4;
-    }
-
-    .neck {
-      width: 34px;
-      height: 38px;
-      background: #ffd2a3;
-      position: absolute;
-      top: 90px;
-      left: 88px;
-      z-index: 2;
-    }
-
-    .arm-left,
-    .arm-right {
-      width: 34px;
-      height: 145px;
-      background: #ffd2a3;
-      border-radius: 30px;
-      position: absolute;
-      top: 135px;
-      z-index: 1;
-    }
-
-    .arm-left {
-      left: 18px;
-      transform: rotate(12deg);
-    }
-
-    .arm-right {
-      right: 18px;
-      transform: rotate(-12deg);
-    }
-
-    .body {
-      width: 142px;
-      height: 220px;
-      position: absolute;
-      top: 116px;
-      left: 34px;
-      border-radius: 48px 48px 22px 22px;
-      background: linear-gradient(180deg, #f8f8f8, #dadada);
-      box-shadow: 0 16px 38px rgba(0,0,0,0.18);
+      width: 42%;
+      height: 30%;
+      top: 44%;
+      left: 29%;
+      border-radius: 24px 24px 16px 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.0), rgba(255,255,255,0.0));
+      mix-blend-mode: multiply;
+      opacity: 0.82;
+      pointer-events: none;
       transition: 0.35s;
-      z-index: 3;
-      border: 4px solid rgba(255,255,255,0.95);
     }
 
-    .skirt {
-      width: 170px;
-      height: 88px;
+    .ariel-skirt {
       position: absolute;
-      top: 286px;
-      left: 20px;
-      border-radius: 22px 22px 58px 58px;
-      background: linear-gradient(180deg, #f8f8f8, #d8d8d8);
+      width: 48%;
+      height: 20%;
+      top: 68%;
+      left: 26%;
+      border-radius: 18px 18px 42px 42px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.0), rgba(255,255,255,0.0));
+      mix-blend-mode: multiply;
+      opacity: 0.78;
+      pointer-events: none;
       transition: 0.35s;
-      z-index: 2;
     }
 
-    .legs {
-      width: 104px;
-      height: 82px;
-      position: absolute;
-      top: 326px;
-      left: 53px;
-      z-index: 0;
-    }
-
-    .legs::before,
-    .legs::after {
-      content: "";
-      width: 34px;
-      height: 82px;
-      background: #ffd2a3;
-      border-radius: 20px;
-      position: absolute;
-      top: 0;
-    }
-
-    .legs::before {
-      left: 10px;
-    }
-
-    .legs::after {
-      right: 10px;
+    .ariel-talk {
+      background: #fff1b8;
+      color: #3a2600;
+      padding: 12px 18px;
+      border-radius: 18px;
+      font-weight: 900;
+      font-size: 16px;
+      text-align: center;
+      line-height: 1.5;
     }
 
     .style-result {
@@ -306,6 +283,50 @@
       font-weight: 700;
     }
 
+    .card {
+      max-width: 820px;
+      margin: 36px auto 0;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #222;
+      font-size: 26px;
+    }
+
+    .status {
+      padding: 12px 14px;
+      margin: 10px 0;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .success {
+      background: #e9f8ef;
+      color: #16703c;
+    }
+
+    .pause {
+      background: #fff4df;
+      color: #9a6200;
+    }
+
+    .card ol {
+      line-height: 1.9;
+      font-weight: 800;
+    }
+
+    .note {
+      margin-top: 18px;
+      padding: 14px;
+      background: #f1f3ff;
+      border-radius: 12px;
+      color: #333;
+      line-height: 1.6;
+      font-weight: 700;
+    }
+
     @media (max-width: 850px) {
       h1 {
         font-size: 27px;
@@ -316,7 +337,7 @@
       }
 
       .model-area {
-        height: 430px;
+        min-height: 470px;
       }
 
       .buttons {
@@ -343,9 +364,23 @@
       }
 
       .stage,
-      .closet {
+      .closet,
+      .card {
         padding: 16px;
         border-radius: 22px;
+      }
+
+      .model-area {
+        min-height: 420px;
+        padding: 10px;
+      }
+
+      .ariel-badge {
+        font-size: 18px;
+      }
+
+      .ariel-talk {
+        font-size: 14px;
       }
 
       .buttons {
@@ -369,9 +404,9 @@
 
 <body>
   <div class="app">
-    <h1>Youbeshop Styling v2.5 ✨</h1>
+    <h1>Youbeshop Styling v3.0 ✨</h1>
     <div class="subtitle">
-      이미지 깨짐을 줄이고, 옷을 누르면 모델에게 착장되는 유비샵 스타일링 게임입니다.
+      아리엘 AI 모델이 유비샵 추천룩을 입어보는 스타일링 게임입니다.
     </div>
 
     <div class="main">
@@ -379,21 +414,25 @@
         <div class="stage-title">👗 MODEL STAGE</div>
 
         <div class="model-area">
-          <div class="model">
-            <div class="hair"></div>
-            <div class="head"></div>
-            <div class="neck"></div>
-            <div class="arm-left"></div>
-            <div class="arm-right"></div>
-            <div class="body" id="body"></div>
-            <div class="skirt" id="skirt"></div>
-            <div class="legs"></div>
+          <div class="ariel-photo-card">
+            <div class="ariel-badge">🤖👗 ARIEL MODEL</div>
+            <div class="ariel-sub">유비샵 AI 전속 모델</div>
+
+            <div class="ariel-photo-wrap">
+              <img src="ariel_model.png" alt="아리엘 모델" class="ariel-photo">
+              <div class="ariel-outfit" id="body"></div>
+              <div class="ariel-skirt" id="skirt"></div>
+            </div>
+
+            <div class="ariel-talk">
+              아리엘이 오늘의 코디를 추천합니다 ☕✨
+            </div>
           </div>
         </div>
 
         <div class="style-result" id="result">
           <strong>아리엘 추천</strong><br>
-          오른쪽 옷 사진이나 아래 스타일 버튼을 눌러보세요. 모델 착장 결과가 여기에 표시됩니다.
+          오른쪽 옷 사진이나 아래 스타일 버튼을 눌러보세요. 아리엘 모델 착장 결과가 여기에 표시됩니다.
         </div>
 
         <div class="buttons">
@@ -470,6 +509,31 @@
         </div>
       </section>
     </div>
+
+    <section class="card">
+      <h2>🚀 유비샵 작업상황판</h2>
+
+      <div class="status success">✅ Cafe24 일본 상품 업로드 성공</div>
+      <div class="status success">✅ Coupang 일본 API 20개 등록 성공</div>
+      <div class="status success">✅ Coupang 중국 의류 20개 등록 성공</div>
+      <div class="status success">✅ Naver 러시아 가방 10개 등록 성공</div>
+      <div class="status success">✅ Cafe24 러시아 30개 등록 성공</div>
+
+      <div class="status pause">⏸ 러시아 상품은 물류비 부담으로 잠시 보류</div>
+
+      <h3>🔥 현재 우선순위</h3>
+      <ol>
+        <li>중국 의류 20개 추가 업로드</li>
+        <li>일본 상품 추가 업로드</li>
+        <li>Cafe24 상품/이미지 점검</li>
+        <li>러시아는 나중에 재검토</li>
+      </ol>
+
+      <p class="note">
+        원칙: 새 길보다 성공한 길을 반복한다.<br>
+        공식 양식 유지, 성공본 복제, 20개 단위 안전 업로드.
+      </p>
+    </section>
 
     <div class="footer">원팀 포에버 · 유비샵 가즈아 ☕🚀</div>
   </div>
@@ -579,81 +643,3 @@
   </script>
 </body>
 </html>
-<section class="card">
-  <h2>🚀 유비샵 작업상황판</h2>
-
-  <div class="status success">✅ Cafe24 일본 상품 업로드 성공</div>
-  <div class="status success">✅ Coupang 일본 API 20개 등록 성공</div>
-  <div class="status success">✅ Coupang 중국 의류 20개 등록 성공</div>
-  <div class="status success">✅ Naver 러시아 가방 10개 등록 성공</div>
-  <div class="status success">✅ Cafe24 러시아 30개 등록 성공</div>
-
-  <div class="status pause">⏸ 러시아 상품은 물류비 부담으로 잠시 보류</div>
-
-  <h3>🔥 현재 우선순위</h3>
-  <ol>
-    <li>중국 의류 20개 추가 업로드</li>
-    <li>일본 상품 추가 업로드</li>
-    <li>Cafe24 상품/이미지 점검</li>
-    <li>러시아는 나중에 재검토</li>
-  </ol>
-
-  <p class="note">
-    원칙: 새 길보다 성공한 길을 반복한다.  
-    공식 양식 유지, 성공본 복제, 20개 단위 안전 업로드.
-  </p>
-</section>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #f7f7f7;
-    margin: 0;
-    padding: 20px;
-  }
-
-  .card {
-    background: white;
-    border-radius: 18px;
-    padding: 24px;
-    max-width: 760px;
-    margin: 20px auto;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-  }
-
-  h2 {
-    margin-top: 0;
-    color: #222;
-  }
-
-  .status {
-    padding: 12px 14px;
-    margin: 10px 0;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 600;
-  }
-
-  .success {
-    background: #e9f8ef;
-    color: #16703c;
-  }
-
-  .pause {
-    background: #fff4df;
-    color: #9a6200;
-  }
-
-  ol {
-    line-height: 1.9;
-    font-weight: 600;
-  }
-
-  .note {
-    margin-top: 18px;
-    padding: 14px;
-    background: #f1f3ff;
-    border-radius: 12px;
-    color: #333;
-    line-height: 1.6;
-  }
-</style>
