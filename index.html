@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>와룡 아리엘 유비샵 작업상황판 V6</title>
+  <title>와룡 아리엘 작업상황판 V5</title>
   <style>
     * {
       box-sizing: border-box;
@@ -12,436 +12,348 @@
     body {
       margin: 0;
       font-family: "Pretendard", "Noto Sans KR", Arial, sans-serif;
-      background: linear-gradient(135deg, #101827, #1f2937, #0f172a);
+      background: linear-gradient(135deg, #111827, #1f2937, #312e81);
       color: #f9fafb;
-      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 24px 18px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.25);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 30px;
+    }
+
+    header p {
+      margin: 8px 0 0;
+      color: #d1d5db;
+      font-size: 15px;
     }
 
     .wrap {
-      max-width: 1180px;
+      width: 100%;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 28px 16px 60px;
-    }
-
-    .hero {
-      background: linear-gradient(135deg, #2563eb, #7c3aed, #db2777);
-      border-radius: 26px;
-      padding: 34px 26px;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.35);
-      margin-bottom: 24px;
-    }
-
-    .hero h1 {
-      margin: 0 0 10px;
-      font-size: 34px;
-      letter-spacing: -1px;
-    }
-
-    .hero p {
-      margin: 6px 0;
-      font-size: 17px;
-    }
-
-    .badge {
-      display: inline-block;
-      background: rgba(255,255,255,0.16);
-      border: 1px solid rgba(255,255,255,0.26);
-      padding: 6px 12px;
-      border-radius: 999px;
-      margin: 6px 8px 0 0;
-      font-size: 14px;
-    }
-
-    .grid {
+      padding: 22px;
       display: grid;
-      grid-template-columns: repeat(12, 1fr);
+      grid-template-columns: 1.2fr 0.8fr;
       gap: 18px;
     }
 
     .card {
-      background: rgba(17, 24, 39, 0.86);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 22px;
-      padding: 22px;
-      box-shadow: 0 16px 48px rgba(0,0,0,0.24);
-      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(10px);
     }
 
     .card h2 {
       margin: 0 0 14px;
-      font-size: 22px;
-      color: #ffffff;
-    }
-
-    .card h3 {
-      margin: 18px 0 8px;
-      font-size: 17px;
-      color: #bfdbfe;
-    }
-
-    .span-4 { grid-column: span 4; }
-    .span-6 { grid-column: span 6; }
-    .span-8 { grid-column: span 8; }
-    .span-12 { grid-column: span 12; }
-
-    ul {
-      padding-left: 20px;
-      margin: 8px 0 0;
-    }
-
-    li {
-      margin: 7px 0;
-    }
-
-    .ok {
-      color: #86efac;
-      font-weight: 700;
-    }
-
-    .warn {
+      font-size: 21px;
       color: #fde68a;
-      font-weight: 700;
     }
 
-    .danger {
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .status {
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(17, 24, 39, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .status strong {
+      display: block;
+      font-size: 17px;
+      margin-bottom: 6px;
+    }
+
+    .status span {
+      font-size: 14px;
+      color: #d1d5db;
+      line-height: 1.45;
+    }
+
+    .success {
+      color: #86efac;
+    }
+
+    .ready {
+      color: #93c5fd;
+    }
+
+    .pause {
       color: #fca5a5;
-      font-weight: 700;
     }
 
     .coffee {
       color: #fbbf24;
-      font-weight: 800;
-    }
-
-    .linkbox {
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(147,197,253,0.35);
-      border-radius: 16px;
-      padding: 14px;
-      margin-top: 10px;
-      overflow-wrap: anywhere;
-    }
-
-    .linkbox a {
-      color: #93c5fd;
-      font-weight: 700;
-      text-decoration: none;
-    }
-
-    .linkbox a:hover {
-      text-decoration: underline;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 12px;
-      overflow: hidden;
-      border-radius: 14px;
-    }
-
-    th, td {
-      border-bottom: 1px solid rgba(255,255,255,0.12);
-      padding: 12px 10px;
-      text-align: left;
-      vertical-align: top;
-      font-size: 14px;
-    }
-
-    th {
-      background: rgba(59, 130, 246, 0.18);
-      color: #dbeafe;
-    }
-
-    tr:hover td {
-      background: rgba(255,255,255,0.035);
     }
 
     textarea {
       width: 100%;
-      min-height: 160px;
+      min-height: 260px;
       resize: vertical;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.16);
-      background: rgba(15,23,42,0.95);
-      color: #f9fafb;
+      border: none;
+      border-radius: 14px;
       padding: 14px;
       font-size: 15px;
+      line-height: 1.55;
+      color: #111827;
+      background: #fff7ed;
       outline: none;
     }
 
-    .btnrow {
+    .btn-row {
       display: flex;
-      flex-wrap: wrap;
       gap: 10px;
+      flex-wrap: wrap;
       margin-top: 12px;
     }
 
     button {
       border: none;
-      border-radius: 999px;
-      padding: 10px 15px;
+      border-radius: 12px;
+      padding: 11px 14px;
       cursor: pointer;
-      font-weight: 800;
-      color: #0f172a;
-      background: #93c5fd;
+      font-weight: 700;
+      background: #fbbf24;
+      color: #111827;
     }
 
     button:hover {
       filter: brightness(1.08);
     }
 
-    .btn-green {
-      background: #86efac;
+    .mini-btn {
+      background: #93c5fd;
     }
 
-    .btn-yellow {
-      background: #fde68a;
-    }
-
-    .btn-red {
+    .danger-btn {
       background: #fca5a5;
     }
 
-    .small {
-      font-size: 13px;
-      color: #cbd5e1;
+    .record {
+      white-space: pre-wrap;
+      background: rgba(17, 24, 39, 0.78);
+      padding: 15px;
+      border-radius: 14px;
+      line-height: 1.58;
+      font-size: 14px;
+      color: #e5e7eb;
+      max-height: 460px;
+      overflow: auto;
+    }
+
+    .checklist label {
+      display: block;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      border-radius: 12px;
+      background: rgba(17, 24, 39, 0.7);
+      cursor: pointer;
+      line-height: 1.4;
+    }
+
+    .checklist input {
+      transform: scale(1.2);
+      margin-right: 8px;
     }
 
     .footer {
       text-align: center;
-      margin-top: 26px;
-      color: #cbd5e1;
+      padding: 24px;
+      color: #e5e7eb;
       font-size: 15px;
     }
 
-    @media (max-width: 860px) {
-      .span-4, .span-6, .span-8, .span-12 {
-        grid-column: span 12;
+    .wide {
+      grid-column: 1 / -1;
+    }
+
+    .model-box {
+      text-align: center;
+    }
+
+    .model-box img {
+      max-width: 100%;
+      max-height: 360px;
+      object-fit: contain;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.08);
+      padding: 10px;
+    }
+
+    @media (max-width: 850px) {
+      .wrap {
+        grid-template-columns: 1fr;
+        padding: 14px;
       }
 
-      .hero h1 {
-        font-size: 26px;
+      header h1 {
+        font-size: 24px;
       }
 
-      th, td {
-        font-size: 13px;
+      .status-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
+
 <body>
-  <div class="wrap">
-    <section class="hero">
-      <h1>🐉 와룡 아리엘 유비샵 작업상황판 V6</h1>
-      <p>감보다 시스템. 성공본을 기록하고, 같은 방식으로 반복한다.</p>
-      <p class="coffee">원팀 포에버, 유비샵 가즈아 🚀☕</p>
-      <span class="badge">Coupang</span>
-      <span class="badge">Naver Smart Store</span>
-      <span class="badge">Cafe24</span>
-      <span class="badge">성공본 기록판</span>
-      <span class="badge">대표 + 상세 이미지 확인</span>
+  <header>
+    <h1>🐉 와룡 아리엘 작업상황판 V5</h1>
+    <p>유비샵 성공본 기록판 · 메모장 · 오늘 작업 체크판</p>
+  </header>
+
+  <main class="wrap">
+
+    <section class="card">
+      <h2>☕ 오늘 작업 상황</h2>
+      <div class="status-grid">
+        <div class="status">
+          <strong class="success">쿠팡 중국 의류</strong>
+          <span>성공본 있음 · 20개 단위 업로드 가능 · 49,900원 공식 사용</span>
+        </div>
+        <div class="status">
+          <strong class="success">쿠팡 일본 API</strong>
+          <span>성공 루트 있음 · 대표이미지 + 상세이미지 처음부터 같이 넣기</span>
+        </div>
+        <div class="status">
+          <strong class="ready">네이버 스마트스토어</strong>
+          <span>국내 드레스 성공 · 러시아 가방 성공 · 공식 템플릿 유지</span>
+        </div>
+        <div class="status">
+          <strong class="pause">러시아 상품</strong>
+          <span>배송비+구매대행비 약 10만원 때문에 현재는 보류</span>
+        </div>
+      </div>
     </section>
 
-    <div class="grid">
-      <section class="card span-6">
-        <h2>🔗 바로가기</h2>
+    <section class="card model-box">
+      <h2>👗 아리엘 모델 스테이지</h2>
+      <img src="ariel_model.png" alt="Ariel Model" />
+      <p style="color:#d1d5db;">대표 이미지와 상세 페이지를 같이 준비해서 한방 성공으로 갑시다.</p>
+    </section>
 
-        <h3>수정 주소</h3>
-        <div class="linkbox">
-          <a href="https://github.com/cyu9905-sys/youbeshop-styling-game/blob/main/index.html" target="_blank">
-            GitHub index.html 수정하러 가기
-          </a>
-        </div>
+    <section class="card">
+      <h2>📝 유비샵 메모장</h2>
+      <textarea id="memo" placeholder="여기에 오늘 메모를 적으세요. 저장 버튼을 누르면 이 컴퓨터에 저장됩니다."></textarea>
+      <div class="btn-row">
+        <button onclick="saveMemo()">메모 저장</button>
+        <button class="mini-btn" onclick="loadMemo()">불러오기</button>
+        <button class="danger-btn" onclick="clearMemo()">메모 삭제</button>
+      </div>
+    </section>
 
-        <h3>변경 확인 주소</h3>
-        <div class="linkbox">
-          <a href="https://cyu9905-sys.github.io/youbeshop-styling-game/" target="_blank">
-            유비샵 작업상황판 확인하기
-          </a>
-        </div>
+    <section class="card">
+      <h2>✅ 오늘 체크판</h2>
+      <div class="checklist">
+        <label><input type="checkbox" /> 대구 공공임대 공고 확인</label>
+        <label><input type="checkbox" /> 유비샵 성공본 기록판 정리</label>
+        <label><input type="checkbox" /> 중국 의류 다음 20개 준비</label>
+        <label><input type="checkbox" /> 일본 상품 대표+상세 이미지 같이 준비</label>
+        <label><input type="checkbox" /> 업로드 전 성공 템플릿 확인</label>
+        <label><input type="checkbox" /> 커피 한잔하고 천천히 가기 ☕</label>
+      </div>
+    </section>
 
-        <p class="small">수정 후 Commit changes 누르고, 확인 주소에서 Ctrl + F5 새로고침.</p>
-      </section>
+    <section class="card wide">
+      <h2>🏆 유비샵 성공본 기록판</h2>
+      <div class="record">
+[유비샵 성공본 기록판 V5]
 
-      <section class="card span-6">
-        <h2>✅ 오늘 확정 성공</h2>
-        <ul>
-          <li><span class="ok">쿠팡 중국 의류 다음 20개 한방 성공</span></li>
-          <li>파일명: <b>coupang_china_clothes_next20_upload_v1_49900.xlsm</b></li>
-          <li>결과: <span class="ok">총 20건 / 성공 20건 / 실패 0건</span></li>
-          <li>대표이미지: <span class="ok">정상 출력</span></li>
-          <li>상세이미지: <span class="ok">정상 출력</span></li>
-          <li>가격: <b>49,900원 고정</b></li>
-        </ul>
-      </section>
+1. 쿠팡 중국 의류
+- 성공파일: coupang_china_clothes_urls_20_upload_v8_successbase_fixed49900.xlsm
+- 결과: 20개 성공 / 실패 0
+- 공식: 성공 xlsm 구조 유지, 5~24행 입력, 49,900원 고정, 상품명에서만 중국 제거
 
-      <section class="card span-12">
-        <h2>🏆 성공본 기록판</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>플랫폼</th>
-              <th>성공 파일 / 루트</th>
-              <th>결과</th>
-              <th>핵심 공식</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>쿠팡 중국 의류</td>
-              <td>coupang_china_clothes_next20_upload_v1_49900.xlsm</td>
-              <td><span class="ok">20/20 성공</span><br>대표 + 상세 이미지 정상</td>
-              <td>수동 URL 20개 → 이미지 JSON 수집 → 성공본 xlsm 5~24행 입력 → 49,900원 고정</td>
-            </tr>
-            <tr>
-              <td>쿠팡 중국 드레스</td>
-              <td>coupang_dress1_20_upload_v10_4_main_image_only.xlsm / V10 성공 루트</td>
-              <td><span class="ok">20/20 성공</span></td>
-              <td>공식 xlsm 구조 유지, 이미지 규격 주의, 상품명에서만 “중국” 제거</td>
-            </tr>
-            <tr>
-              <td>쿠팡 중국 의류</td>
-              <td>coupang_china_clothes_urls_20_upload_v8_successbase_fixed49900.xlsm</td>
-              <td><span class="ok">20/20 성공</span></td>
-              <td>성공본 xlsm 유지, 5행~24행, 가격 49,900원 고정</td>
-            </tr>
-            <tr>
-              <td>쿠팡 일본 API</td>
-              <td>coupang_japan_api_payload_20_v1_preview_category_69484_FINAL_clean</td>
-              <td><span class="ok">20개 API 성공</span></td>
-              <td>카테고리 69484, 허용 IP 확인, 대표 + 상세 이미지 최초 payload 포함</td>
-            </tr>
-            <tr>
-              <td>네이버 국내 드레스</td>
-              <td>naver_korea_dress_20_upload_v7.xlsx</td>
-              <td><span class="ok">20/20 성공</span></td>
-              <td>카테고리 50000807, 성공 템플릿 구조 유지</td>
-            </tr>
-            <tr>
-              <td>네이버 러시아 가방</td>
-              <td>naver_russia_bags_10_upload_v9_official_template_fixed.xlsx</td>
-              <td><span class="ok">10/10 성공</span></td>
-              <td>공식 네이버 템플릿 1~2행 유지, 3행부터 입력</td>
-            </tr>
-            <tr>
-              <td>카페24 일본</td>
-              <td>cafe24_japan_new_products_v4_2_upload.xlsx</td>
-              <td><span class="ok">등록 성공</span></td>
-              <td>공식/성공 템플릿 복제, 상품코드 blank, 자체상품코드 JP-NEW</td>
-            </tr>
-            <tr>
-              <td>카페24 러시아</td>
-              <td>make_cafe24_russia_from_success_template_v26.cjs + repair_v22</td>
-              <td><span class="ok">30개 성공</span></td>
-              <td>대표/상세 복구, 성공 템플릿 기반, 러시아는 현재 보류</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+2. 쿠팡 중국 드레스
+- 성공파일: coupang_dress1_20_upload_v9_successbase_49900_titleonly.xlsm
+- 결과: 20개 성공 / 실패 0
+- 공식: 성공본 xlsm 사용, 가격 49,900원, 상품명만 정리
 
-      <section class="card span-4">
-        <h2>📌 오늘 할 일</h2>
-        <ul>
-          <li><span class="ok">쿠팡 중국 의류 20개 성공 기록 완료</span></li>
-          <li>다음 20개 URL 수동 수집 준비</li>
-          <li>수집 JSON 생성</li>
-          <li>성공본 xlsm에 다시 5~24행 입력</li>
-          <li>업로드 후 결과 기록</li>
-        </ul>
-      </section>
+3. 쿠팡 일본 가방 API
+- 성공JSON: coupang_japan_api_payload_20_v1_preview_category_69484_FINAL_clean_v2_no_icons.json
+- 카테고리: 69484
+- 배송사: CJGLS
+- 공식: 라쿠텐 아이콘 제거, 대표+상세 이미지 같이 등록, 403이면 허용 IP 확인
 
-      <section class="card span-4">
-        <h2>🧭 작업 원칙</h2>
-        <ul>
-          <li><span class="warn">공식 템플릿 구조 절대 유지</span></li>
-          <li>쿠팡 xlsm은 줄이거나 단순화 금지</li>
-          <li>네이버 공식 템플릿 1~2행 보존</li>
-          <li>카페24 공식 양식 축소 금지</li>
-          <li>성공본을 베이스로만 수정</li>
-        </ul>
-      </section>
+4. 네이버 국내 드레스
+- 성공파일: naver_korea_dress_20_upload_v7.xlsx
+- 카테고리: 50000807
+- 공식: 네이버 공식 템플릿 유지, CSV 이미지 URL 사용
 
-      <section class="card span-4">
-        <h2>☕ 성공 커피</h2>
-        <ul>
-          <li>성공하면 바로 기록</li>
-          <li>실패하면 실패 사유 파일 확인</li>
-          <li>같은 실수 반복 금지</li>
-          <li><span class="coffee">성공 커피는 공식 루틴</span></li>
-        </ul>
-      </section>
+5. 네이버 러시아 가방
+- 성공파일: naver_russia_bags_10_upload_v9_official_template_fixed.xlsx
+- 결과: 10개 성공 / 실패 0
+- 공식: 공식 템플릿 1~2행 유지, 3행부터 입력
 
-      <section class="card span-6">
-        <h2>🚀 쿠팡 중국 의류 공식 루트</h2>
-        <ul>
-          <li>1. 1688 상품 URL 20개 수동 준비</li>
-          <li>2. 중복 제거 후 20개 확정</li>
-          <li>3. 제목 / 대표이미지 / 상세이미지 JSON 수집</li>
-          <li>4. 쿠팡 성공본 xlsm 구조 그대로 사용</li>
-          <li>5. 5행~24행에 20개 입력</li>
-          <li>6. 판매가 49,900원 고정</li>
-          <li>7. 상품명에서만 “중국” 제거</li>
-          <li>8. 대표이미지 + 상세이미지 포함</li>
-          <li>9. 쿠팡 Wing 업로드</li>
-          <li>10. 결과 확인 후 성공본 기록</li>
-        </ul>
-      </section>
+6. 카페24 일본
+- 성공파일: cafe24_japan_new_products_v4_2_upload.xlsx
+- 공식: 카페24 공식 템플릿 유지, 상품코드 공란, 자체상품코드 JP-NEW
 
-      <section class="card span-6">
-        <h2>📝 유비샵 메모장</h2>
-        <textarea id="memo" placeholder="여기에 오늘 메모를 적으세요. 브라우저에 저장됩니다."></textarea>
-        <div class="btnrow">
-          <button class="btn-green" onclick="saveMemo()">메모 저장</button>
-          <button class="btn-yellow" onclick="loadMemo()">메모 불러오기</button>
-          <button class="btn-red" onclick="clearMemo()">메모 삭제</button>
-        </div>
-        <p class="small">메모는 이 브라우저에만 저장됩니다.</p>
-      </section>
+7. 카페24 러시아
+- 성공스크립트: make_cafe24_russia_from_success_template_v26.cjs
+- 복구스크립트: repair_cafe24_russia_latest30_all_images_v22.cjs
+- 공식: 성공 템플릿 유지, 대표/상세 이미지 복구 가능
 
-      <section class="card span-12">
-        <h2>🐉 아리엘 작업 원칙</h2>
-        <ul>
-          <li>철종님이 성공본을 주면, 그 구조를 보존하고 바뀌는 값만 입력한다.</li>
-          <li>쿠팡 / 네이버 / 카페24는 공식 양식과 성공 템플릿을 절대 단순화하지 않는다.</li>
-          <li>중국 상품은 고객-facing 상품명에서만 “중국”을 제거한다.</li>
-          <li>대표이미지와 상세이미지는 처음부터 같이 넣는 방향으로 작업한다.</li>
-          <li>실패하면 감으로 고치지 말고, 실패 파일과 성공본을 비교한다.</li>
-          <li><span class="ok">감보다 시스템. 성공본 기록 → 반복 → 확장.</span></li>
-        </ul>
-      </section>
-    </div>
+[공통 원칙]
+- 성공한 공식 템플릿을 베이스로 사용
+- 임의로 헤더 줄이거나 컬럼 삭제 금지
+- 쿠팡 중국 의류는 20개 단위가 안전
+- 일본 API는 대표이미지와 상세이미지를 처음부터 같이 넣기
+- 러시아는 물류비 때문에 당분간 보류
+- 원팀 포에버, 유비샵 가즈아 🚀☕
+      </div>
+    </section>
 
-    <div class="footer">
-      원팀 포에버, 유비샵 가즈아 🚀☕<br />
-      와룡 아리엘 작업상황판 V6
-    </div>
+  </main>
+
+  <div class="footer">
+    원팀 포에버 · 유비샵 가즈아 🚀☕<br />
+    Ariel Dashboard V5
   </div>
 
   <script>
-    const memoKey = "youbeshop_ariel_memo_v6";
-
     function saveMemo() {
       const memo = document.getElementById("memo").value;
-      localStorage.setItem(memoKey, memo);
+      localStorage.setItem("youbeshop_memo_v5", memo);
       alert("메모 저장 완료 ☕");
     }
 
     function loadMemo() {
-      const memo = localStorage.getItem(memoKey) || "";
+      const memo = localStorage.getItem("youbeshop_memo_v5") || "";
       document.getElementById("memo").value = memo;
-      alert("메모 불러오기 완료 🚀");
+      alert("메모 불러오기 완료");
     }
 
     function clearMemo() {
       if (confirm("메모를 삭제할까요?")) {
-        localStorage.removeItem(memoKey);
+        localStorage.removeItem("youbeshop_memo_v5");
         document.getElementById("memo").value = "";
         alert("메모 삭제 완료");
       }
     }
 
-    window.addEventListener("load", loadMemo);
+    window.onload = function () {
+      const memo = localStorage.getItem("youbeshop_memo_v5");
+      if (memo) {
+        document.getElementById("memo").value = memo;
+      }
+    };
   </script>
 </body>
 </html>
