@@ -1,359 +1,140 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>와룡 아리엘 작업상황판 V5</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<!-- ✅ YOUBESHOP 성공본 기록판 V11 -->
+<section class="success-board">
+  <div class="success-card">
+    <div class="success-badge">SUCCESS</div>
 
-    body {
-      margin: 0;
-      font-family: "Pretendard", "Noto Sans KR", Arial, sans-serif;
-      background: linear-gradient(135deg, #111827, #1f2937, #312e81);
-      color: #f9fafb;
-      min-height: 100vh;
-    }
+    <h2>☕ 유비샵 성공본 기록판</h2>
+    <p class="subtitle">아리엘 × 철종 원팀 공식 기록</p>
 
-    header {
-      padding: 24px 18px;
-      text-align: center;
-      background: rgba(0, 0, 0, 0.25);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    }
+    <div class="record-box">
+      <h3>✅ 쿠팡 중국 의류 V11 성공</h3>
 
-    header h1 {
-      margin: 0;
-      font-size: 30px;
-    }
+      <ul>
+        <li><strong>성공일:</strong> 2026-06-21</li>
+        <li><strong>성공 파일:</strong> coupang_v11_fresh_unique_5_17.xlsm</li>
+        <li><strong>기준 성공본:</strong> coupang_china_clothes_next20_upload_v1_49900.xlsm</li>
+        <li><strong>입력 범위:</strong> 데이터 시트 5행 ~ 17행</li>
+        <li><strong>등록 수량:</strong> 13개 상품</li>
+        <li><strong>핵심 처리:</strong> 중복 offerId 제거 후 새 업로드</li>
+        <li><strong>결과:</strong> 대표이미지 / 상세이미지 정상 등록</li>
+      </ul>
 
-    header p {
-      margin: 8px 0 0;
-      color: #d1d5db;
-      font-size: 15px;
-    }
-
-    .wrap {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 22px;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 18px;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.09);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 18px;
-      padding: 18px;
-      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.25);
-      backdrop-filter: blur(10px);
-    }
-
-    .card h2 {
-      margin: 0 0 14px;
-      font-size: 21px;
-      color: #fde68a;
-    }
-
-    .status-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .status {
-      padding: 14px;
-      border-radius: 14px;
-      background: rgba(17, 24, 39, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-    }
-
-    .status strong {
-      display: block;
-      font-size: 17px;
-      margin-bottom: 6px;
-    }
-
-    .status span {
-      font-size: 14px;
-      color: #d1d5db;
-      line-height: 1.45;
-    }
-
-    .success {
-      color: #86efac;
-    }
-
-    .ready {
-      color: #93c5fd;
-    }
-
-    .pause {
-      color: #fca5a5;
-    }
-
-    .coffee {
-      color: #fbbf24;
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 260px;
-      resize: vertical;
-      border: none;
-      border-radius: 14px;
-      padding: 14px;
-      font-size: 15px;
-      line-height: 1.55;
-      color: #111827;
-      background: #fff7ed;
-      outline: none;
-    }
-
-    .btn-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
-
-    button {
-      border: none;
-      border-radius: 12px;
-      padding: 11px 14px;
-      cursor: pointer;
-      font-weight: 700;
-      background: #fbbf24;
-      color: #111827;
-    }
-
-    button:hover {
-      filter: brightness(1.08);
-    }
-
-    .mini-btn {
-      background: #93c5fd;
-    }
-
-    .danger-btn {
-      background: #fca5a5;
-    }
-
-    .record {
-      white-space: pre-wrap;
-      background: rgba(17, 24, 39, 0.78);
-      padding: 15px;
-      border-radius: 14px;
-      line-height: 1.58;
-      font-size: 14px;
-      color: #e5e7eb;
-      max-height: 460px;
-      overflow: auto;
-    }
-
-    .checklist label {
-      display: block;
-      padding: 10px 12px;
-      margin-bottom: 8px;
-      border-radius: 12px;
-      background: rgba(17, 24, 39, 0.7);
-      cursor: pointer;
-      line-height: 1.4;
-    }
-
-    .checklist input {
-      transform: scale(1.2);
-      margin-right: 8px;
-    }
-
-    .footer {
-      text-align: center;
-      padding: 24px;
-      color: #e5e7eb;
-      font-size: 15px;
-    }
-
-    .wide {
-      grid-column: 1 / -1;
-    }
-
-    .model-box {
-      text-align: center;
-    }
-
-    .model-box img {
-      max-width: 100%;
-      max-height: 360px;
-      object-fit: contain;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.08);
-      padding: 10px;
-    }
-
-    @media (max-width: 850px) {
-      .wrap {
-        grid-template-columns: 1fr;
-        padding: 14px;
-      }
-
-      header h1 {
-        font-size: 24px;
-      }
-
-      .status-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <header>
-    <h1>🐉 와룡 아리엘 작업상황판 V5</h1>
-    <p>유비샵 성공본 기록판 · 메모장 · 오늘 작업 체크판</p>
-  </header>
-
-  <main class="wrap">
-
-    <section class="card">
-      <h2>☕ 오늘 작업 상황</h2>
-      <div class="status-grid">
-        <div class="status">
-          <strong class="success">쿠팡 중국 의류</strong>
-          <span>성공본 있음 · 20개 단위 업로드 가능 · 49,900원 공식 사용</span>
-        </div>
-        <div class="status">
-          <strong class="success">쿠팡 일본 API</strong>
-          <span>성공 루트 있음 · 대표이미지 + 상세이미지 처음부터 같이 넣기</span>
-        </div>
-        <div class="status">
-          <strong class="ready">네이버 스마트스토어</strong>
-          <span>국내 드레스 성공 · 러시아 가방 성공 · 공식 템플릿 유지</span>
-        </div>
-        <div class="status">
-          <strong class="pause">러시아 상품</strong>
-          <span>배송비+구매대행비 약 10만원 때문에 현재는 보류</span>
-        </div>
+      <div class="warning-box">
+        🔒 핵심 자동화 코드, API 키, 소싱 URL, 계정 정보는 GitHub에 공개하지 않음
       </div>
-    </section>
+    </div>
 
-    <section class="card model-box">
-      <h2>👗 아리엘 모델 스테이지</h2>
-      <img src="ariel_model.png" alt="Ariel Model" />
-      <p style="color:#d1d5db;">대표 이미지와 상세 페이지를 같이 준비해서 한방 성공으로 갑시다.</p>
-    </section>
+    <div class="record-box">
+      <h3>📌 다음 작업 체크리스트</h3>
 
-    <section class="card">
-      <h2>📝 유비샵 메모장</h2>
-      <textarea id="memo" placeholder="여기에 오늘 메모를 적으세요. 저장 버튼을 누르면 이 컴퓨터에 저장됩니다."></textarea>
-      <div class="btn-row">
-        <button onclick="saveMemo()">메모 저장</button>
-        <button class="mini-btn" onclick="loadMemo()">불러오기</button>
-        <button class="danger-btn" onclick="clearMemo()">메모 삭제</button>
-      </div>
-    </section>
+      <ol>
+        <li>성공본 XLSM 구조 그대로 사용</li>
+        <li>데이터는 지정 행에만 입력</li>
+        <li>중복 상품 / 중복 offerId 제거</li>
+        <li>대표이미지와 상세이미지 확인</li>
+        <li>쿠팡 업로드 전 기존 실패본 정리</li>
+        <li>업로드 후 실제 상품 노출 확인</li>
+      </ol>
+    </div>
 
-    <section class="card">
-      <h2>✅ 오늘 체크판</h2>
-      <div class="checklist">
-        <label><input type="checkbox" /> 대구 공공임대 공고 확인</label>
-        <label><input type="checkbox" /> 유비샵 성공본 기록판 정리</label>
-        <label><input type="checkbox" /> 중국 의류 다음 20개 준비</label>
-        <label><input type="checkbox" /> 일본 상품 대표+상세 이미지 같이 준비</label>
-        <label><input type="checkbox" /> 업로드 전 성공 템플릿 확인</label>
-        <label><input type="checkbox" /> 커피 한잔하고 천천히 가기 ☕</label>
-      </div>
-    </section>
-
-    <section class="card wide">
-      <h2>🏆 유비샵 성공본 기록판</h2>
-      <div class="record">
-[유비샵 성공본 기록판 V5]
-
-1. 쿠팡 중국 의류
-- 성공파일: coupang_china_clothes_urls_20_upload_v8_successbase_fixed49900.xlsm
-- 결과: 20개 성공 / 실패 0
-- 공식: 성공 xlsm 구조 유지, 5~24행 입력, 49,900원 고정, 상품명에서만 중국 제거
-
-2. 쿠팡 중국 드레스
-- 성공파일: coupang_dress1_20_upload_v9_successbase_49900_titleonly.xlsm
-- 결과: 20개 성공 / 실패 0
-- 공식: 성공본 xlsm 사용, 가격 49,900원, 상품명만 정리
-
-3. 쿠팡 일본 가방 API
-- 성공JSON: coupang_japan_api_payload_20_v1_preview_category_69484_FINAL_clean_v2_no_icons.json
-- 카테고리: 69484
-- 배송사: CJGLS
-- 공식: 라쿠텐 아이콘 제거, 대표+상세 이미지 같이 등록, 403이면 허용 IP 확인
-
-4. 네이버 국내 드레스
-- 성공파일: naver_korea_dress_20_upload_v7.xlsx
-- 카테고리: 50000807
-- 공식: 네이버 공식 템플릿 유지, CSV 이미지 URL 사용
-
-5. 네이버 러시아 가방
-- 성공파일: naver_russia_bags_10_upload_v9_official_template_fixed.xlsx
-- 결과: 10개 성공 / 실패 0
-- 공식: 공식 템플릿 1~2행 유지, 3행부터 입력
-
-6. 카페24 일본
-- 성공파일: cafe24_japan_new_products_v4_2_upload.xlsx
-- 공식: 카페24 공식 템플릿 유지, 상품코드 공란, 자체상품코드 JP-NEW
-
-7. 카페24 러시아
-- 성공스크립트: make_cafe24_russia_from_success_template_v26.cjs
-- 복구스크립트: repair_cafe24_russia_latest30_all_images_v22.cjs
-- 공식: 성공 템플릿 유지, 대표/상세 이미지 복구 가능
-
-[공통 원칙]
-- 성공한 공식 템플릿을 베이스로 사용
-- 임의로 헤더 줄이거나 컬럼 삭제 금지
-- 쿠팡 중국 의류는 20개 단위가 안전
-- 일본 API는 대표이미지와 상세이미지를 처음부터 같이 넣기
-- 러시아는 물류비 때문에 당분간 보류
-- 원팀 포에버, 유비샵 가즈아 🚀☕
-      </div>
-    </section>
-
-  </main>
-
-  <div class="footer">
-    원팀 포에버 · 유비샵 가즈아 🚀☕<br />
-    Ariel Dashboard V5
+    <div class="team-message">
+      원팀 포에버, 유비샵 가즈아 🚀☕
+    </div>
   </div>
+</section>
 
-  <script>
-    function saveMemo() {
-      const memo = document.getElementById("memo").value;
-      localStorage.setItem("youbeshop_memo_v5", memo);
-      alert("메모 저장 완료 ☕");
+<style>
+  .success-board {
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #fff7e6, #f1f5ff);
+    font-family: Arial, sans-serif;
+  }
+
+  .success-card {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    border: 2px solid #ffe1a8;
+    position: relative;
+  }
+
+  .success-badge {
+    display: inline-block;
+    background: #ffb703;
+    color: #222;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+
+  .success-card h2 {
+    margin: 0;
+    font-size: 30px;
+    color: #222;
+  }
+
+  .subtitle {
+    margin-top: 8px;
+    color: #666;
+    font-size: 16px;
+  }
+
+  .record-box {
+    margin-top: 24px;
+    padding: 22px;
+    border-radius: 18px;
+    background: #fafafa;
+    border: 1px solid #eeeeee;
+  }
+
+  .record-box h3 {
+    margin-top: 0;
+    color: #1f2937;
+    font-size: 22px;
+  }
+
+  .record-box ul,
+  .record-box ol {
+    padding-left: 22px;
+    line-height: 1.8;
+    color: #333;
+    font-size: 16px;
+  }
+
+  .warning-box {
+    margin-top: 18px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: #fff1f2;
+    color: #9f1239;
+    font-weight: bold;
+    border: 1px solid #fecdd3;
+  }
+
+  .team-message {
+    margin-top: 28px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #2563eb;
+  }
+
+  @media (max-width: 600px) {
+    .success-card {
+      padding: 22px;
     }
 
-    function loadMemo() {
-      const memo = localStorage.getItem("youbeshop_memo_v5") || "";
-      document.getElementById("memo").value = memo;
-      alert("메모 불러오기 완료");
+    .success-card h2 {
+      font-size: 24px;
     }
 
-    function clearMemo() {
-      if (confirm("메모를 삭제할까요?")) {
-        localStorage.removeItem("youbeshop_memo_v5");
-        document.getElementById("memo").value = "";
-        alert("메모 삭제 완료");
-      }
+    .record-box h3 {
+      font-size: 19px;
     }
-
-    window.onload = function () {
-      const memo = localStorage.getItem("youbeshop_memo_v5");
-      if (memo) {
-        document.getElementById("memo").value = memo;
-      }
-    };
-  </script>
-</body>
-</html>
+  }
+</style>
