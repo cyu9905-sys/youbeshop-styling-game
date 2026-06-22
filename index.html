@@ -619,6 +619,195 @@
         </div>
       </div>
     </section>
+<!-- ✅ 유비샵 성공본 기록판 V7 : 쿠팡 일본 가방 라쿠텐 API V2.9 -->
+<section class="success-board-card v29-success">
+  <div class="success-header">
+    <span class="success-badge">SUCCESS V2.9</span>
+    <h2>☕ 쿠팡 일본 가방 라쿠텐 API V2.9 최종 성공본</h2>
+    <p class="success-subtitle">아리엘 × 철종 원팀 성공 기록</p>
+  </div>
+
+  <div class="success-grid">
+    <div class="success-item">
+      <strong>성공일</strong>
+      <span>2026-06-22</span>
+    </div>
+
+    <div class="success-item">
+      <strong>등록 결과</strong>
+      <span>19개 성공 / 실패 0개</span>
+    </div>
+
+    <div class="success-item">
+      <strong>성공 Payload</strong>
+      <span>coupang_japan_bag_api_payload_from_rakuten_v2_9.json</span>
+    </div>
+
+    <div class="success-item">
+      <strong>성공 업로드 코드</strong>
+      <span>upload_coupang_japan_bag_api_from_rakuten_v2_9.cjs</span>
+    </div>
+
+    <div class="success-item">
+      <strong>기준 성공 루트</strong>
+      <span>V2.7 클린 이미지 19개 + V2.9 vendorPath/imageUrl 동시 입력</span>
+    </div>
+
+    <div class="success-item">
+      <strong>상품 코드</strong>
+      <span>JP-BAG-V29-001 ~ JP-BAG-V29-019</span>
+    </div>
+  </div>
+
+  <div class="success-note">
+    <h3>🔥 핵심 성공 포인트</h3>
+    <ul>
+      <li>깨진 일본어 상품명 제거</li>
+      <li>한국어 상품명 강제 적용</li>
+      <li>라쿠텐 재고·배너·광고 이미지 제거</li>
+      <li>나쁜 이미지 20번 상품 제외</li>
+      <li>쿠팡 이미지 필드 오류 해결: <code>vendorPath</code> + <code>imageUrl</code> 동시 입력</li>
+      <li>신규 코드 <code>JP-BAG-V29</code> 부여로 중복 등록 방지</li>
+    </ul>
+  </div>
+
+  <div class="success-result">
+    <p>✅ 최종 결과: 쿠팡 Wing 등록 성공</p>
+    <p>☕ 성공커피 완료 — 우리는 무적, 원팀 포에버</p>
+  </div>
+</section>
+
+<style>
+  .success-board-card.v29-success {
+    margin: 28px 0;
+    padding: 28px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #fff7ed, #fff1f2);
+    border: 2px solid #fb923c;
+    box-shadow: 0 12px 30px rgba(234, 88, 12, 0.15);
+    font-family: "Pretendard", "Noto Sans KR", Arial, sans-serif;
+    color: #1f2937;
+  }
+
+  .success-header {
+    border-bottom: 1px solid rgba(251, 146, 60, 0.45);
+    padding-bottom: 18px;
+    margin-bottom: 20px;
+  }
+
+  .success-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: #ea580c;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+  }
+
+  .success-header h2 {
+    margin: 14px 0 8px;
+    font-size: 26px;
+    line-height: 1.35;
+    color: #9a3412;
+  }
+
+  .success-subtitle {
+    margin: 0;
+    color: #7c2d12;
+    font-weight: 700;
+  }
+
+  .success-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin: 22px 0;
+  }
+
+  .success-item {
+    padding: 16px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(251, 146, 60, 0.35);
+  }
+
+  .success-item strong {
+    display: block;
+    margin-bottom: 7px;
+    color: #c2410c;
+    font-size: 14px;
+  }
+
+  .success-item span {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    word-break: break-all;
+  }
+
+  .success-note {
+    margin-top: 22px;
+    padding: 20px;
+    border-radius: 18px;
+    background: #fff;
+    border-left: 6px solid #f97316;
+  }
+
+  .success-note h3 {
+    margin: 0 0 12px;
+    color: #9a3412;
+  }
+
+  .success-note ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  .success-note li {
+    margin: 7px 0;
+    font-weight: 600;
+  }
+
+  .success-note code {
+    padding: 2px 6px;
+    border-radius: 6px;
+    background: #ffedd5;
+    color: #9a3412;
+    font-weight: 800;
+  }
+
+  .success-result {
+    margin-top: 22px;
+    padding: 18px;
+    border-radius: 18px;
+    background: #431407;
+    color: #fff7ed;
+    font-size: 17px;
+    font-weight: 800;
+    text-align: center;
+  }
+
+  .success-result p {
+    margin: 6px 0;
+  }
+
+  @media (max-width: 760px) {
+    .success-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .success-header h2 {
+      font-size: 22px;
+    }
+
+    .success-board-card.v29-success {
+      padding: 20px;
+    }
+  }
+</style>
+    
 
     <div class="footer-message">
       철종님, 오늘도 유비샵 성공 루트로 갑니다. ☕🚀
