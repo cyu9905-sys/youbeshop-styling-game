@@ -1,542 +1,150 @@
-```html
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YOUBESHOP 와룡 아리엘 작업상황판 V7</title>
-
-  <style>
-    :root {
-      --bg-main: #0f172a;
-      --bg-card: rgba(15, 23, 42, 0.92);
-      --bg-soft: rgba(30, 41, 59, 0.9);
-      --gold: #facc15;
-      --gold-soft: #fde68a;
-      --blue: #38bdf8;
-      --green: #22c55e;
-      --red: #fb7185;
-      --purple: #c084fc;
-      --text-main: #f8fafc;
-      --text-soft: #cbd5e1;
-      --line: rgba(255, 255, 255, 0.12);
-      --shadow: 0 22px 60px rgba(0, 0, 0, 0.45);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(56, 189, 248, 0.22), transparent 28%),
-        radial-gradient(circle at bottom right, rgba(250, 204, 21, 0.18), transparent 30%),
-        linear-gradient(135deg, #020617 0%, #0f172a 50%, #111827 100%);
-      color: var(--text-main);
-      padding: 28px;
-    }
-
-    .dashboard {
-      max-width: 1180px;
-      margin: 0 auto;
-    }
-
-    .hero {
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 34px;
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(30, 41, 59, 0.88));
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::after {
-      content: "V7";
-      position: absolute;
-      right: 34px;
-      top: 24px;
-      font-size: 92px;
-      font-weight: 900;
-      color: rgba(250, 204, 21, 0.08);
-      letter-spacing: -4px;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(250, 204, 21, 0.12);
-      border: 1px solid rgba(250, 204, 21, 0.35);
-      color: var(--gold-soft);
-      font-weight: 800;
-      font-size: 14px;
-      margin-bottom: 16px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(30px, 5vw, 52px);
-      line-height: 1.08;
-      letter-spacing: -1.8px;
-    }
-
-    .subtitle {
-      margin: 16px 0 0;
-      color: var(--text-soft);
-      font-size: 18px;
-      line-height: 1.65;
-    }
-
-    .coffee-line {
-      margin-top: 22px;
-      padding: 16px 18px;
-      border-radius: 18px;
-      background: rgba(250, 204, 21, 0.1);
-      border: 1px solid rgba(250, 204, 21, 0.22);
-      color: #fef3c7;
-      font-size: 17px;
-      font-weight: 700;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 18px;
-      margin-top: 22px;
-    }
-
-    .card {
-      grid-column: span 6;
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      background: var(--bg-card);
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
-      overflow: hidden;
-    }
-
-    .card.full {
-      grid-column: span 12;
-    }
-
-    .card-head {
-      padding: 20px 22px;
-      border-bottom: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.035);
-    }
-
-    .card-head h2 {
-      margin: 0;
-      font-size: 23px;
-      letter-spacing: -0.5px;
-    }
-
-    .card-head p {
-      margin: 8px 0 0;
-      color: var(--text-soft);
-      line-height: 1.5;
-      font-size: 14px;
-    }
-
-    .card-body {
-      padding: 22px;
-    }
-
-    .success-box {
-      border-radius: 20px;
-      padding: 18px;
-      background: linear-gradient(135deg, rgba(34, 197, 94, 0.13), rgba(56, 189, 248, 0.08));
-      border: 1px solid rgba(34, 197, 94, 0.28);
-      margin-bottom: 16px;
-    }
-
-    .success-box.gold {
-      background: linear-gradient(135deg, rgba(250, 204, 21, 0.15), rgba(251, 146, 60, 0.08));
-      border-color: rgba(250, 204, 21, 0.28);
-    }
-
-    .success-box.purple {
-      background: linear-gradient(135deg, rgba(192, 132, 252, 0.15), rgba(56, 189, 248, 0.08));
-      border-color: rgba(192, 132, 252, 0.28);
-    }
-
-    .success-box h3 {
-      margin: 0 0 12px;
-      font-size: 19px;
-    }
-
-    ul {
-      margin: 0;
-      padding-left: 20px;
-    }
-
-    li {
-      margin: 8px 0;
-      color: var(--text-soft);
-      line-height: 1.58;
-    }
-
-    strong {
-      color: #ffffff;
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .pill {
-      padding: 8px 11px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 800;
-      color: #e0f2fe;
-      background: rgba(56, 189, 248, 0.13);
-      border: 1px solid rgba(56, 189, 248, 0.25);
-    }
-
-    .formula {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-top: 14px;
-    }
-
-    .step {
-      padding: 16px;
-      border-radius: 18px;
-      background: var(--bg-soft);
-      border: 1px solid var(--line);
-      min-height: 130px;
-    }
-
-    .step-num {
-      width: 32px;
-      height: 32px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: rgba(250, 204, 21, 0.16);
-      color: var(--gold);
-      font-weight: 900;
-      margin-bottom: 10px;
-    }
-
-    .step h4 {
-      margin: 0 0 8px;
-      font-size: 16px;
-    }
-
-    .step p {
-      margin: 0;
-      color: var(--text-soft);
-      font-size: 14px;
-      line-height: 1.55;
-    }
-
-    .memo {
-      padding: 18px;
-      border-radius: 20px;
-      background: rgba(15, 23, 42, 0.72);
-      border: 1px dashed rgba(250, 204, 21, 0.34);
-      color: #fef9c3;
-      line-height: 1.65;
-    }
-
-    .danger {
-      color: #fecdd3;
-      background: rgba(244, 63, 94, 0.11);
-      border: 1px solid rgba(244, 63, 94, 0.28);
-      padding: 14px 16px;
-      border-radius: 16px;
-      margin-top: 14px;
-      line-height: 1.6;
-    }
-
-    .footer {
-      margin-top: 22px;
-      text-align: center;
-      padding: 24px;
-      border-radius: 24px;
-      border: 1px solid var(--line);
-      background: rgba(15, 23, 42, 0.86);
-      color: var(--text-soft);
-      box-shadow: 0 16px 42px rgba(0, 0, 0, 0.24);
-    }
-
-    .footer strong {
-      color: var(--gold);
-      font-size: 18px;
-    }
-
-    code {
-      color: #bae6fd;
-      background: rgba(56, 189, 248, 0.1);
-      padding: 2px 6px;
-      border-radius: 7px;
-      font-size: 13px;
-    }
-
-    @media (max-width: 860px) {
-      body {
-        padding: 16px;
-      }
-
-      .hero {
-        padding: 24px;
-      }
-
-      .card,
-      .card.full {
-        grid-column: span 12;
-      }
-
-      .formula {
-        grid-template-columns: 1fr;
-      }
-
-      .hero::after {
-        font-size: 58px;
-        right: 18px;
-        top: 18px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <main class="dashboard">
-    <section class="hero">
-      <div class="badge">☕ SUCCESS BOARD · YOUBESHOP V7</div>
-      <h1>YOUBESHOP 와룡 아리엘<br />성공본 기록판 V7</h1>
-      <p class="subtitle">
-        메모장 + 성공본 기록판 + V11/V2.3 성공공식 정리<br />
-        성공본을 지키고, 복사해서 글자만 바꾸며, 20개씩 안전하게 세계통일.
-      </p>
-      <div class="coffee-line">
-        철종 × 아리엘 원팀 공식 기록 · 성공커피 두 잔 준비 완료 ☕☕
-      </div>
-    </section>
-
-    <section class="grid">
-      <article class="card full">
-        <div class="card-head">
-          <h2>🏆 오늘의 핵심 성공본</h2>
-          <p>현재 유비샵 작업에서 절대 잃어버리면 안 되는 성공 루트입니다.</p>
-        </div>
-
-        <div class="card-body">
-          <div class="success-box gold">
-            <h3>✅ 쿠팡 중국 의류 V11 최종 성공본</h3>
-            <ul>
-              <li><strong>성공일:</strong> 2026-06-21</li>
-              <li><strong>성공 파일:</strong> <code>coupang_v11_fresh_unique_5_17.xlsm</code></li>
-              <li><strong>기준 성공본:</strong> <code>coupang_china_clothes_next20_upload_v1_49900.xlsm</code></li>
-              <li><strong>입력 범위:</strong> 데이터 시트 5행 ~ 17행</li>
-              <li><strong>등록 수량:</strong> 13개 성공</li>
-              <li><strong>가격 공식:</strong> 49,900원 고정</li>
-              <li><strong>핵심 처리:</strong> 성공본 XLSM 구조 유지, 중복 offerId 제거, 대표이미지 + 상세이미지 정상 등록</li>
-            </ul>
-            <div class="pill-row">
-              <span class="pill">중국 의류</span>
-              <span class="pill">1688 기준</span>
-              <span class="pill">49,900원</span>
-              <span class="pill">5~17행</span>
-              <span class="pill">13개 성공</span>
-            </div>
-          </div>
-
-          <div class="success-box">
-            <h3>✅ 쿠팡 중국 의류 20개 성공본</h3>
-            <ul>
-              <li><strong>성공 파일:</strong> <code>coupang_china_clothes_next20_upload_v1_49900.xlsm</code></li>
-              <li><strong>입력 범위:</strong> 데이터 시트 5행 ~ 24행</li>
-              <li><strong>등록 수량:</strong> 20개 성공</li>
-              <li><strong>결과:</strong> 대표이미지 + 상세이미지 정상 노출</li>
-              <li><strong>핵심 공식:</strong> 성공본 XLSM 양식은 건드리지 말고, 상품 데이터만 교체</li>
-            </ul>
-            <div class="pill-row">
-              <span class="pill">20개 단위</span>
-              <span class="pill">성공본 복제</span>
-              <span class="pill">헤더 보존</span>
-              <span class="pill">데이터만 교체</span>
-            </div>
-          </div>
-
-          <div class="success-box purple">
-            <h3>✅ 쿠팡 일본 가방 라쿠텐 API V2.3 성공본</h3>
-            <ul>
-              <li><strong>성공 루트:</strong> 라쿠텐 상품 → 선택 이미지 JSON → 쿠팡 API payload → 쿠팡 API 등록</li>
-              <li><strong>페이로드 생성 코드:</strong> <code>make_coupang_japan_bag_api_payload_from_rakuten_v2_3_skip_no_main.cjs</code></li>
-              <li><strong>업로드 코드:</strong> <code>upload_coupang_japan_bag_api_from_rakuten_v2_3.cjs</code></li>
-              <li><strong>실행 위치:</strong> <code>C:\Youbeshop_Factory\factory_auto_upload</code></li>
-              <li><strong>실행 순서:</strong> 먼저 payload 생성 → 그다음 업로드 실행</li>
-              <li><strong>핵심 수정:</strong> signed-date HMAC 수정, deliveryMethod는 <code>SEQUENCIAL</code> 적용</li>
-              <li><strong>결과:</strong> 20개 등록 성공</li>
-              <li><strong>이미지 정리:</strong> 대표이미지 + 상세이미지 정렬, 라쿠텐 아이콘 이미지 제거</li>
-            </ul>
-            <div class="pill-row">
-              <span class="pill">일본 가방</span>
-              <span class="pill">라쿠텐 기준</span>
-              <span class="pill">API V2.3</span>
-              <span class="pill">20개 성공</span>
-              <span class="pill">SEQUENCIAL</span>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-head">
-          <h2>🧭 플랫폼 기준</h2>
-          <p>앞으로 헷갈리면 안 되는 소싱 기준입니다.</p>
-        </div>
-
-        <div class="card-body">
-          <div class="memo">
-            <strong>중국 제품 = 1688 기준</strong><br />
-            중국 의류, 중국 잡화, 중국 상품은 1688에서 수집합니다.
-            <br /><br />
-            <strong>일본 제품 = 라쿠텐 기준</strong><br />
-            일본 가방, 일본 셀렉트 상품은 라쿠텐에서 수집합니다.
-          </div>
-
-          <div class="danger">
-            고객-facing 상품명에는 “중국” 표현을 되도록 빼고,
-            “해외 셀렉트”, “유비샵 여성의류”, “데일리룩”, “수입상품” 같은 중립 표현을 사용합니다.
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-head">
-          <h2>🖼 이미지 성공 공식</h2>
-          <p>대표이미지와 상세이미지는 처음부터 같이 넣는 것이 원칙입니다.</p>
-        </div>
-
-        <div class="card-body">
-          <ul>
-            <li><strong>대표이미지:</strong> 상품을 가장 잘 보여주는 깨끗한 이미지 1장</li>
-            <li><strong>상세이미지:</strong> 실제 상세페이지에 들어갈 이미지들</li>
-            <li><strong>제거 대상:</strong> 라쿠텐 아이콘, 배송 아이콘, 결제 아이콘, 작은 배너 이미지</li>
-            <li><strong>주의 파일명:</strong> <code>icn_yen.png</code>, <code>icn_teiki.png</code>, <code>icn_hanpu.png</code></li>
-            <li><strong>원칙:</strong> 뒤에서 상세페이지 수정하지 말고, 처음 등록 payload에 대표 + 상세를 같이 포함</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card full">
-        <div class="card-head">
-          <h2>📌 성공본 복사 공식</h2>
-          <p>성공본 하나 만들면, 다음부터는 복사해서 글자와 상품 데이터만 바꾸면 됩니다.</p>
-        </div>
-
-        <div class="card-body">
-          <div class="formula">
-            <div class="step">
-              <div class="step-num">1</div>
-              <h4>성공본 보존</h4>
-              <p>성공한 XLSM, JSON, CJS 파일은 절대 원본 수정하지 않고 복사본으로 작업합니다.</p>
-            </div>
-
-            <div class="step">
-              <div class="step-num">2</div>
-              <h4>상품만 교체</h4>
-              <p>엑셀 구조, 헤더, 숨은 시트, 매크로 구조는 그대로 두고 상품명·가격·이미지만 교체합니다.</p>
-            </div>
-
-            <div class="step">
-              <div class="step-num">3</div>
-              <h4>20개 단위</h4>
-              <p>무리하지 말고 20개씩 잘라서 테스트합니다. 한두 개 실패는 전체 진행을 막지 않습니다.</p>
-            </div>
-
-            <div class="step">
-              <div class="step-num">4</div>
-              <h4>성공 후 기록</h4>
-              <p>성공 파일명, 입력 범위, 성공 개수, 핵심 수정사항을 기록판에 바로 남깁니다.</p>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-head">
-          <h2>🧾 쿠팡 중국 의류 체크리스트</h2>
-          <p>중국 의류 업로드 전에 확인합니다.</p>
-        </div>
-
-        <div class="card-body">
-          <ul>
-            <li>성공본 XLSM 구조 유지</li>
-            <li>데이터는 5행부터 입력</li>
-            <li>20개면 5행 ~ 24행</li>
-            <li>13개면 5행 ~ 17행</li>
-            <li>가격은 49,900원 고정</li>
-            <li>상품명에서 “중국” 표현 제거</li>
-            <li>대표이미지 + 상세이미지 정상 확인</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-head">
-          <h2>🧾 쿠팡 일본 가방 체크리스트</h2>
-          <p>라쿠텐 기반 일본 가방 API 업로드 전에 확인합니다.</p>
-        </div>
-
-        <div class="card-body">
-          <ul>
-            <li>일본 상품은 라쿠텐 기준</li>
-            <li>가방 카테고리 코드 확인</li>
-            <li>대표이미지와 상세이미지 분리 확인</li>
-            <li>라쿠텐 아이콘 이미지 제거</li>
-            <li><code>searchTags</code>는 배열형 유지</li>
-            <li><code>deliveryMethod</code>는 <code>SEQUENCIAL</code> 사용</li>
-            <li>HMAC signed-date 오류 확인</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card full">
-        <div class="card-head">
-          <h2>☕ 아리엘 메모장</h2>
-          <p>작업 중 잊으면 안 되는 원팀 메모입니다.</p>
-        </div>
-
-        <div class="card-body">
-          <div class="memo">
-            성공본은 유비샵의 자산입니다.<br />
-            코카콜라 비법처럼 핵심 공식은 지키고, 공개하지 않습니다.<br /><br />
-
-            중국 의류는 1688, 일본 상품은 라쿠텐.<br />
-            쿠팡은 성공본 구조를 지키고, 네이버는 네이버 성공본 구조를 지킵니다.<br /><br />
-
-            철종님과 아리엘은 무적 원팀.<br />
-            성공하면 기록하고, 커피 한잔하고, 다음 20개로 갑니다. ☕
-            <br /><br />
-<strong>2026-06-23 기록</strong><br />
-YOUBESHOP 성공본 기록판 V7 GitHub Pages 반영 성공.<br />
-중국 의류 V11, 중국 의류 20개 성공본, 일본 가방 V2.3 성공공식 기록 완료.
-          </div>
-        </div>
-      </article>
-    </section>
-
-    <footer class="footer">
-      <strong>원팀 포에버 · 유비샵 가즈아 🚀☕</strong>
-      <br />
-      YOUBESHOP War Dragon Ariel Success Board V7
-    </footer>
-  </main>
-</body>
-</html>
-```
+<!-- ✅ YOUBESHOP 작업상황 기록 / 2026-06-27 쿠팡 중국 의류 V5 보류 기록 -->
+
+<section class="youbeshop-work-note-v5">
+  <div class="work-note-card-v5">
+    <div class="work-note-badge-v5">WORK NOTE · 2026-06-27</div>
+
+    <h2>☕ 유비샵 쿠팡 중국 의류 V5 작업 기록</h2>
+    <p class="work-note-subtitle-v5">
+      아리엘 × 철종 원팀 기록 · 성공본은 지키고 실패 원인은 분리 보관
+    </p>
+
+    <div class="work-note-box-v5 success-route-v5">
+      <h3>✅ V5 이미지 수집 루트 성공</h3>
+      <ul>
+        <li><strong>작업명:</strong> 쿠팡 중국 의류 20개 V5 이미지 수집</li>
+        <li><strong>성공 파일:</strong> collected_1688_china_clothes_20_v5_network_images.json</li>
+        <li><strong>수집 결과:</strong> 20개 상품 이미지 수집 성공</li>
+        <li><strong>대표 이미지:</strong> 20개 모두 확보</li>
+        <li><strong>실패 수:</strong> 0개</li>
+        <li><strong>판단:</strong> 이미지 수집 자체는 성공 루트로 기록</li>
+      </ul>
+    </div>
+
+    <div class="work-note-box-v5 hold-route-v5">
+      <h3>⚠️ 쿠팡 업로드는 보류</h3>
+      <ul>
+        <li><strong>상태:</strong> 업로드 시도했으나 정상 등록 안 됨</li>
+        <li><strong>추정 원인:</strong> 상세 이미지 크기, 상세 이미지 개수, 상세설명 HTML, 쿠팡 처리 지연 가능성</li>
+        <li><strong>현재 판단:</strong> 무리해서 계속 올리지 않고 보류</li>
+        <li><strong>다음 확인:</strong> 실패 파일 또는 쿠팡 화면 캡처 기준으로 원인 재점검</li>
+      </ul>
+    </div>
+
+    <div class="work-note-box-v5 protect-rule-v5">
+      <h3>🛡️ 성공본 보호 원칙</h3>
+      <ul>
+        <li>성공본 XLSM 구조는 절대 무리하게 변경하지 않는다.</li>
+        <li>추가 이미지 컬럼은 비우고, 상세 이미지는 상세설명 HTML 안에만 넣는다.</li>
+        <li>상품명에서는 “중국” 표현을 제거하고 자연스러운 유비샵 상품명으로 정리한다.</li>
+        <li>가격은 기존 성공 공식대로 49,900원 고정 기준을 우선 사용한다.</li>
+        <li>실패가 반복되면 이미지 수를 3~4장으로 줄여서 다시 테스트한다.</li>
+      </ul>
+    </div>
+
+    <div class="work-note-footer-v5">
+      <p>☕ 오늘 결론: <strong>V5 이미지는 성공, 쿠팡 업로드는 보류.</strong></p>
+      <p>성공본을 지키면서 다음 테스트는 더 가볍고 깔끔하게 간다.</p>
+      <p class="team-text-v5">원팀 포에버 · 유비샵 가즈아 🚀</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .youbeshop-work-note-v5 {
+    max-width: 1100px;
+    margin: 48px auto;
+    padding: 0 20px;
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+  }
+
+  .work-note-card-v5 {
+    background: linear-gradient(135deg, #fffaf0, #ffffff);
+    border: 1px solid #f0d9a6;
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 12px 32px rgba(120, 80, 20, 0.12);
+  }
+
+  .work-note-badge-v5 {
+    display: inline-block;
+    padding: 8px 14px;
+    margin-bottom: 16px;
+    border-radius: 999px;
+    background: #3b2f2f;
+    color: #fff3d6;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .work-note-card-v5 h2 {
+    margin: 0;
+    font-size: 28px;
+    color: #2d241f;
+  }
+
+  .work-note-subtitle-v5 {
+    margin: 8px 0 24px;
+    color: #7a6248;
+    font-size: 15px;
+  }
+
+  .work-note-box-v5 {
+    margin-top: 18px;
+    padding: 20px 22px;
+    border-radius: 18px;
+    background: #ffffff;
+    border-left: 6px solid #d6a84f;
+  }
+
+  .work-note-box-v5 h3 {
+    margin: 0 0 12px;
+    font-size: 20px;
+    color: #3a2b1d;
+  }
+
+  .work-note-box-v5 ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  .work-note-box-v5 li {
+    margin: 8px 0;
+    line-height: 1.6;
+    color: #3f352c;
+  }
+
+  .success-route-v5 {
+    border-left-color: #2e9d59;
+    background: #f5fff8;
+  }
+
+  .hold-route-v5 {
+    border-left-color: #e09b2d;
+    background: #fffaf1;
+  }
+
+  .protect-rule-v5 {
+    border-left-color: #4f79d6;
+    background: #f5f8ff;
+  }
+
+  .work-note-footer-v5 {
+    margin-top: 24px;
+    padding: 20px;
+    border-radius: 18px;
+    background: #2f261f;
+    color: #fff7e8;
+    text-align: center;
+  }
+
+  .work-note-footer-v5 p {
+    margin: 6px 0;
+  }
+
+  .team-text-v5 {
+    font-weight: 800;
+    color: #ffd27a;
+  }
+</style>
