@@ -4,49 +4,52 @@
   <div class="work-note-card-v5">
     <div class="work-note-badge-v5">WORK NOTE · 2026-06-27</div>
 
-    <h2>☕ 유비샵 쿠팡 중국 의류 V5 작업 기록</h2>
-    <p class="work-note-subtitle-v5">
-      아리엘 × 철종 원팀 기록 · 성공본은 지키고 실패 원인은 분리 보관
-    </p>
+```
+<h2>☕ 유비샵 쿠팡 중국 의류 V5 작업 기록</h2>
+<p class="work-note-subtitle-v5">
+  아리엘 × 철종 원팀 기록 · V5 이미지 수집 성공, 쿠팡 업로드는 보류 점검
+</p>
 
-    <div class="work-note-box-v5 success-route-v5">
-      <h3>✅ V5 이미지 수집 루트 성공</h3>
-      <ul>
-        <li><strong>작업명:</strong> 쿠팡 중국 의류 20개 V5 이미지 수집</li>
-        <li><strong>성공 파일:</strong> collected_1688_china_clothes_20_v5_network_images.json</li>
-        <li><strong>수집 결과:</strong> 20개 상품 이미지 수집 성공</li>
-        <li><strong>대표 이미지:</strong> 20개 모두 확보</li>
-        <li><strong>실패 수:</strong> 0개</li>
-        <li><strong>판단:</strong> 이미지 수집 자체는 성공 루트로 기록</li>
-      </ul>
-    </div>
+<div class="work-note-box-v5 success-route-v5">
+  <h3>✅ V5 이미지 수집 루트 성공</h3>
+  <ul>
+    <li><strong>작업명:</strong> 쿠팡 중국 의류 20개 V5 이미지 수집</li>
+    <li><strong>성공 파일:</strong> collected_1688_china_clothes_20_v5_network_images.json</li>
+    <li><strong>수집 결과:</strong> 20개 상품 이미지 수집 성공</li>
+    <li><strong>대표 이미지:</strong> 20개 모두 확보</li>
+    <li><strong>실패 수:</strong> 0개</li>
+    <li><strong>판단:</strong> 이미지 수집 자체는 성공 루트로 기록</li>
+  </ul>
+</div>
 
-    <div class="work-note-box-v5 hold-route-v5">
-      <h3>⚠️ 쿠팡 업로드는 보류</h3>
-      <ul>
-        <li><strong>상태:</strong> 업로드 시도했으나 정상 등록 안 됨</li>
-        <li><strong>추정 원인:</strong> 상세 이미지 크기, 상세 이미지 개수, 상세설명 HTML, 쿠팡 처리 지연 가능성</li>
-        <li><strong>현재 판단:</strong> 무리해서 계속 올리지 않고 보류</li>
-        <li><strong>다음 확인:</strong> 실패 파일 또는 쿠팡 화면 캡처 기준으로 원인 재점검</li>
-      </ul>
-    </div>
+<div class="work-note-box-v5 hold-route-v5">
+  <h3>⚠️ 쿠팡 업로드는 보류</h3>
+  <ul>
+    <li><strong>상태:</strong> 업로드 시도했으나 정상 등록 안 됨</li>
+    <li><strong>추정 원인:</strong> 상세 이미지 크기, 상세 이미지 개수, 상세설명 HTML, 쿠팡 처리 지연 가능성</li>
+    <li><strong>현재 판단:</strong> 무리해서 계속 올리지 않고 보류</li>
+    <li><strong>다음 확인:</strong> 실패 파일 또는 쿠팡 화면 캡처 기준으로 원인 재점검</li>
+  </ul>
+</div>
 
-    <div class="work-note-box-v5 protect-rule-v5">
-      <h3>🛡️ 성공본 보호 원칙</h3>
-      <ul>
-        <li>성공본 XLSM 구조는 절대 무리하게 변경하지 않는다.</li>
-        <li>추가 이미지 컬럼은 비우고, 상세 이미지는 상세설명 HTML 안에만 넣는다.</li>
-        <li>상품명에서는 “중국” 표현을 제거하고 자연스러운 유비샵 상품명으로 정리한다.</li>
-        <li>가격은 기존 성공 공식대로 49,900원 고정 기준을 우선 사용한다.</li>
-        <li>실패가 반복되면 이미지 수를 3~4장으로 줄여서 다시 테스트한다.</li>
-      </ul>
-    </div>
+<div class="work-note-box-v5 protect-rule-v5">
+  <h3>🛡️ 성공본 보호 원칙</h3>
+  <ul>
+    <li>성공본 XLSM 구조는 절대 무리하게 변경하지 않는다.</li>
+    <li>추가 이미지 컬럼은 비우고, 상세 이미지는 상세설명 HTML 안에만 넣는다.</li>
+    <li>상품명에서는 “중국” 표현을 제거하고 자연스러운 유비샵 상품명으로 정리한다.</li>
+    <li>가격은 기존 성공 공식대로 49,900원 고정 기준을 우선 사용한다.</li>
+    <li>실패가 반복되면 상세 이미지를 3~4장으로 줄여서 다시 테스트한다.</li>
+  </ul>
+</div>
 
-    <div class="work-note-footer-v5">
-      <p>☕ 오늘 결론: <strong>V5 이미지는 성공, 쿠팡 업로드는 보류.</strong></p>
-      <p>성공본을 지키면서 다음 테스트는 더 가볍고 깔끔하게 간다.</p>
-      <p class="team-text-v5">원팀 포에버 · 유비샵 가즈아 🚀</p>
-    </div>
+<div class="work-note-footer-v5">
+  <p>☕ 오늘 결론: <strong>V5 이미지는 성공, 쿠팡 업로드는 보류.</strong></p>
+  <p>성공본을 지키면서 다음 테스트는 더 가볍고 깔끔하게 간다.</p>
+  <p class="team-text-v5">원팀 포에버 · 유비샵 가즈아 🚀</p>
+</div>
+```
+
   </div>
 </section>
 
